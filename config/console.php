@@ -1,12 +1,12 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$db = require __DIR__ . '/db-local.php';
 
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'queue'],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -14,9 +14,6 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
-//        'cache' => [
-//            'class' => 'yii\caching\FileCache',
-//        ],
         'log' => [
             'targets' => [
                 [
@@ -25,16 +22,14 @@ $config = [
                 ],
             ],
         ],
+        'queue' => [
+            'class' => \yii\queue\file\Queue::class,
+            'path' => '@runtime/queue',
+            'as log' => \yii\queue\LogBehavior::class,
+        ],
         'db' => $db,
     ],
     'params' => $params,
-    /*
-    'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
-        ],
-    ],
-    */
 ];
 
 if (YII_ENV_DEV) {

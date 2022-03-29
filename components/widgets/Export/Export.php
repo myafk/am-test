@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\Export;
+namespace app\components\widgets\Export;
 
 use kartik\export\ExportMenu;
 use Yii;

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\DateTime;
+namespace app\components\widgets\DateTime;
 
 use Exception;
 use yii\base\Widget;

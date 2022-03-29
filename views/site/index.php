@@ -1,6 +1,6 @@
 <?php
 
-use app\widgets\HistoryList\HistoryList;
+use app\components\services\History\widgets\HistoryList\HistoryList;
 
 $this->title = 'Americor Test';
 ?>
