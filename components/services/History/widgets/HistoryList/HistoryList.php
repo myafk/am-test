@@ -1,9 +1,9 @@
 <?php
 
-namespace app\widgets\HistoryList;
+namespace app\components\services\History\widgets\HistoryList;
 
 use app\models\search\HistorySearch;
-use app\widgets\Export\Export;
+use app\components\widgets\Export\Export;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -11,6 +11,14 @@ use Yii;
 
 class HistoryList extends Widget
 {
+    
+    public function init()
+    {
+        parent::init();
+        
+        $this->registerAssets();
+    }
+    
     /**
      * @return string
      */
@@ -37,5 +45,10 @@ class HistoryList extends Widget
         $params[0] = 'site/export';
 
         return Url::to($params);
+    }
+    
+    public function registerAssets()
+    {
+        HistoryListAsset::register($this->view);
     }
 }

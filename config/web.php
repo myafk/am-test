@@ -1,7 +1,7 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$db = require(__DIR__ . '/db-local.php');
 
 $config = [
     'id' => 'basic',
@@ -17,9 +17,6 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '_KrWQvmDJum_stF3vIO3MgXIyKn-rX28',
         ],
-//        'cache' => [
-//            'class' => 'yii\caching\FileCache',
-//        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
@@ -44,14 +41,11 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+        'queue' => [
+            'class' => \yii\queue\file\Queue::class,
+            'path' => '@runtime/queue',
+            'as log' => \yii\queue\LogBehavior::class,
         ],
-        */
     ],
     'modules' => [
         'gridview' => [

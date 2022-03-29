@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use app\models\traits\ObjectNameTrait;
+use app\components\services\History\traits\RelatedObjectTrait;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -24,14 +24,10 @@ use yii\db\ActiveRecord;
  *
  * @property Customer $customer
  * @property User $user
- *
- * @property Task $task
- * @property Sms $sms
- * @property Call $call
  */
 class History extends ActiveRecord
 {
-    use ObjectNameTrait;
+    use RelatedObjectTrait;
 
     const EVENT_CREATED_TASK = 'created_task';
     const EVENT_UPDATED_TASK = 'updated_task';
@@ -56,7 +52,7 @@ class History extends ActiveRecord
     {
         return '{{%history}}';
     }
-
+    
     /**
      * @inheritdoc
      */
@@ -147,8 +143,7 @@ class History extends ActiveRecord
     {
         return static::getEventTextByEvent($this->event);
     }
-
-
+    
     /**
      * @param $attribute
      * @return null
