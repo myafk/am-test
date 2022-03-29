@@ -2,6 +2,7 @@
 
 namespace app\components\services\History;
 
+use app\components\services\history\interfaces\ObjectInterface;
 use app\components\services\History\objects\CallHistoryObject;
 use app\components\services\History\objects\CustomerHistoryObject;
 use app\components\services\History\objects\FaxHistoryObject;
@@ -15,18 +16,18 @@ final class HistoryObjectStaticFactory
 {
     public static $map = [
         'lead' => CustomerHistoryObject::class,
-        'sms' => SmsHistoryObject::class,
+        'sms'  => SmsHistoryObject::class,
         'task' => TaskHistoryObject::class,
         'call' => CallHistoryObject::class,
-        'fax' => FaxHistoryObject::class
+        'fax'  => FaxHistoryObject::class,
     ];
     
-    public static function factory(string $object, History $history, ActiveRecordInterface $record)
+    public static function factory(string $object, History $history, ActiveRecordInterface $record): ObjectInterface
     {
         if (isset(self::$map[$object])) {
             return new self::$map[$object]($history, $record);
         }
-    
+        
         throw new InvalidArgumentException('Unknown object given');
     }
 }
